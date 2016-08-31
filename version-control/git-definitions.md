@@ -17,3 +17,5 @@ A commit is a save point. A good commit message describes what has been done in 
 * What is a merge conflict?
 
 A merge conflict occurs when there have been multiple changes made to a file by multiple actors - Git will recognize the changes, but won't know which change to go ahead with over the other. 
+
+# 
