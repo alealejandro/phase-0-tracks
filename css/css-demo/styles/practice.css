@@ -1,0 +1,37 @@
+#contact-info {
+	font-size: .8em;
+}
+
+.job {
+	background-color: #e9e5dc;
+	border-radius: 10px;
+	padding: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.job-ul {
+	font-size: .8em;
+}
+
+.job:hover {
+	background-color: white;
+}
+
+/*
+
+1. Cascading (CSS) - refers to the inheritance.
+When there's a conflict, they're cascading because the 
+MOST SPECIFIC rule always wins.
+
+2. Pseudo-selecors - adds special effects to certain elements.
+a:hover {
+	color: #FF00FF;
+}
+So if a is an actual selector, the :hover is the pseudo-selector
+and lets us target that pseudo-element & make changes using CSS.
+
+3. We can specify the most-general element then specify the class/id if needed, then the most specific element you are trying to target
+- Add a space between the elements, unless using the class/id as a qualifier to that element
+
+*/
