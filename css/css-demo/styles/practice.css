@@ -18,6 +18,10 @@
 	background-color: white;
 }
 
+section.job li:last-of-type {
+	font-size: 1.2em;
+}
+
 /*
 
 1. Cascading (CSS) - refers to the inheritance.
