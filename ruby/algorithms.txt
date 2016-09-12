@@ -1,0 +1,53 @@
+Elevator:
+
+Which floor are you? Which floor is your destination? Need to go up/down?
+Once floor is determined,
+- Move to button
+- Press up/down
+
+Until elevator door opens
+- Wait
+
+When elevator door opens
+- If passengers are leaving
+  - Wait until they clear out
+  - Move inside elevator car
+- Else
+  - Move inside elevator car
+
+When elevator door closes
+- Move to button panel
+- Press number corresponding to desired floor
+
+Until desired floor is reached & door opens
+- Wait
+
+When desired floor is reached & door opens
+- Move outside elevator car
+- Go to destination
+
+
+
+Drinking from a cup of water:
+
+Locate water cup (original position).
+
+Determine distance from your hand.
+- If too far from reach,
+  - Move body closer
+- Else
+  - Reach out with hand
+
+Once bottle is within hand range
+- Close grip to grab cup
+- Lift cup up to mouth, parallel to floor
+- Open mouth slightly
+
+Slowly tilt far end of cup upward toward mouth
+If mouth full,
+- Untilt cup quickly
+- Swallow water
+- Still thirsty?
+  - Repeat
+- Else
+  - put water cup back to original position
