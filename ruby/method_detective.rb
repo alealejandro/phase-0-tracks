@@ -28,57 +28,66 @@ puts "Stop! You’re under arrest!".upcase
 puts ""
 
 # "the usual".<???>
-puts "the usual" + " suspects"
-puts "the usual".gsub("l", "l suspects")
-puts "the usual".sub("l", "l suspects")
-puts "the usual" << " suspects"
+a = "the usual"
+puts a + " suspects"
+puts a.gsub("l", "l suspects")
+puts a.sub("l", "l suspects")
+puts a << " suspects"
 #=> "the usual suspects"
 puts ""
 
 # " suspects".<???>
-puts " suspects".insert(0, "the usual")
-puts " suspects".prepend("the usual")
-puts " suspects".replace("the usual suspects")
-puts " suspects".rjust(18, "the usual")
-puts " suspects".gsub(" s", "the usual s")
-puts " suspects".sub(" s", "the usual s")	
+a = " suspects"
+puts a.insert(0, "the usual")
+a = " suspects"
+puts a.prepend("the usual")
+puts a.replace("the usual suspects")
+a = " suspects"
+puts a.rjust(18, "the usual")
+puts a.gsub(" s", "the usual s")
+puts a.sub(" s", "the usual s")	
 # => "the usual suspects"
 puts ""
 
 # "The case of the disappearing last letter".<???>
-puts "The case of the disappearing last letter"[0, 39]
-puts "The case of the disappearing last letter"[0..38]
-puts "The case of the disappearing last letter"[0...39]
-puts "The case of the disappearing last letter"["The case of the disappearing last lette"]
-puts "The case of the disappearing last letter".byteslice(0, 39)
-puts "The case of the disappearing last letter".byteslice(0..38)
-puts "The case of the disappearing last letter".byteslice(0...39)
-puts "The case of the disappearing last letter".chop
+a = "The case of the disappearing last letter"
+puts a[0, 39]
+puts a[0..38]
+puts a[0...39]
+puts a["The case of the disappearing last lette"]
+puts a.byteslice(0, 39)
+puts a.byteslice(0..38)
+puts a.byteslice(0...39)
+puts a.chop
 # delete("r") - how to target last r?
-puts "The case of the disappearing last letter".gsub("er", "e")
-puts "The case of the disappearing last letter".replace("The case of the disappearing last lette")
-puts "The case of the disappearing last letter".slice(0, 39)
-puts "The case of the disappearing last letter".slice(0..38)
-puts "The case of the disappearing last letter".slice(0...39)
-puts "The case of the disappearing last letter".sub("er", "e")
+puts a.gsub("er", "e")
+puts a.replace("The case of the disappearing last lette")
+a = "The case of the disappearing last letter"
+puts a.slice(0, 39)
+puts a.slice(0..38)
+puts a.slice(0...39)
+puts a.sub("er", "e")
 # => "The case of the disappearing last lette"
 puts ""
 
 # "The mystery of the missing first letter".<???>
-puts "The mystery of the missing first letter"[1, 39]
-puts "The mystery of the missing first letter"[1..38]
-puts "The mystery of the missing first letter"[1...39]
-puts "The mystery of the missing first letter"["he mystery of the missing first letter"]
-puts "The mystery of the missing first letter".byteslice(1, 39)
-puts "The mystery of the missing first letter".byteslice(1..38)
-puts "The mystery of the missing first letter".byteslice(1...39)
-puts "The mystery of the missing first letter".delete("T")
-puts "The mystery of the missing first letter".gsub("T", "")
-puts "The mystery of the missing first letter".replace("he mystery of the missing first letter")
-puts "The mystery of the missing first letter".slice(1, 39)
-puts "The mystery of the missing first letter".slice(1..38)
-puts "The mystery of the missing first letter".slice(1...39)
-puts "The mystery of the missing first letter".sub("T", "")
+a = "The mystery of the missing first letter"
+puts a[1, 39]
+puts a[1..38]
+puts a[1...39]
+puts a["he mystery of the missing first letter"]
+puts a.byteslice(1, 39)
+puts a.byteslice(1..38)
+puts a.byteslice(1...39)
+puts a.delete("T")
+puts a.gsub("T", "")
+puts a.replace("he mystery of the missing first letter")
+a = "The mystery of the missing first letter"
+# replace seems to mutate the caller
+puts a.slice(1, 39)
+puts a.slice(1..38)
+puts a.slice(1...39)
+puts a.sub("T", "")
 # => "he mystery of the missing first letter"
 puts ""
 
@@ -86,8 +95,9 @@ puts ""
 a = "Elementary,    my   dear        Watson!"
 puts a.gsub("    ", " ").gsub("  ", " ").gsub("  ", " ")
 puts a.replace("Elementary, my dear Watson!")
+a = "Elementary,    my   dear        Watson!"
 puts a.squeeze
-puts a.sub("    ", " ").sub("  ", " ").sub("  ", " ")
+puts a.sub("    ", " ").sub("  ", " ").sub("  ", " ").sub("        ", " ")
 # => "Elementary, my dear Watson!"
 puts ""
 
