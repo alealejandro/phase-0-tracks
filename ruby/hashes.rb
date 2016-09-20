@@ -1,73 +1,137 @@
-client_details = {}
-alpha_regex = /[[:alpha:]]+/
-# age_regex = /[[:digit:]]+/
+$client_details = {}
 
 puts "\nPlease enter the following details of your client:"
 
 # Name
-valid = false
-until valid
-	puts "\nWhat is the client's name?"
-	print "\n> "
-	client_details[:name] = gets.chomp
-	if client_details[:name].match(alpha_regex) 
-	# is a string, but only doing one character - how to match all characters via iteration? map as array?
-	# scan?
-	# name.split.map(&:capitalize).join(' ')} (something similar)?
-		valid = true
-	else
-		puts "\nInvalid, please try again."
+def set_name
+	valid = false
+	until valid
+		puts "\nWhat is the client's name?"
+		print "\n> "
+		name = gets.chomp
+
+		name_check_array = name.scan(/./)
+		i = 0
+		until i == name_check_array.length
+			if name_check_array[i].match(/[[:alpha:]]/) || name_check_array[i].match(/[[:blank:]]/)
+				i += 1
+				valid = true
+			else
+				puts "\nInvalid."
+				valid = false
+				break
+			end
+		end
 	end
+	$client_details[:name] = name
 end
+set_name
 
 # Age
-valid = false
-until valid
-	puts "\nWhat is the client's age?"
-	print "\n> "
-	client_details[:age] = gets.chomp.to_i
-	#if client_details[:age].match(age_regex) # is a digit
-	if client_details[:age] > 0
-		valid = true
-	else
-		puts "\nInvalid, please try again."
-	end
-end
+def set_age
+	valid = false
+	until valid
+		puts "\nWhat is the client's age?"
+		print "\n> "
+		age = gets.chomp
 
-# Number of children & Age of children
-valid = false
-until valid
-	puts "\nHow many children does the client have?"
-	print "\n> "
-	client_details[:num_children] = gets.chomp.to_i
-	# to_i defaults to 0 if no number specified, so will always be valid...
-	if client_details[:num_children] >= 0
-		valid = true
-		puts "\nHow old are they?"
-		client_details[:age_children] = []
-		i = 1
-		until i > client_details[:num_children]
-			print"\n> "
-			client_details[:age_children] << gets.chomp.to_i
-			i += 1
+		# Check if input is integer
+		age_check_array = age.scan(/./)
+		i = 0
+		until i == age_check_array.length
+			if age_check_array[i].match(/[[:digit:]]/)
+				i += 1
+				valid = true
+			else
+				puts "\nInvalid."
+				valid = false
+				break
+			end
 		end
-	else
-		puts "\nInvalid, please try again."
+	  age = age.to_i
+
+	  # Check if age is > 0 years old
+	  if age <= 0
+	  	puts "\nInvalid."
+	  	valid = false
+	  else
+	  	$client_details[:age] = age
+	  end
 	end
 end
+set_age
+
+# Number of children
+def set_num_children
+	valid = false
+	until valid
+		puts "\nHow many children does the client have?"
+		print "\n> "
+	  num_children = gets.chomp
+
+	  # Check if input is an integer
+	  num_children_check_array = num_children.scan(/./)
+	  i = 0
+		until i == num_children_check_array.length
+			if num_children_check_array[i].match(/[[:digit:]]/)
+				i += 1
+				valid = true
+			else
+				puts "\nInvalid."
+				valid = false
+				break
+			end
+		end
+		num_children = num_children.to_i
+		$client_details[:num_children] = num_children
+	end
+	# Age of children
+	if num_children > 0
+		puts "\nHow old are they?"
+		$client_details[:age_children] = []
+		nth_child = 1 
+		until (nth_child > num_children)
+			i = 0
+			print"\n> "
+			age = gets.chomp
+			age_check_array = age.scan(/./)
+			until i == age_check_array.length
+				if age_check_array[i].match(/[[:digit:]]/)
+					i += 1
+				else
+					puts "\nInvalid."
+					break
+				end
+				# where to set valid = true
+				if i == age_check_array.length # passed through string checker, then
+					age = age.to_i
+					$client_details[:age_children] << age
+					nth_child += 1
+				end
+			end 
+		end
+	end
+end
+set_num_children
+
+
 
 # Decor Theme
-puts "\nWhat is the client's preferrable decor theme?"
-print "\n> "
-client_details[:decor] = gets.chomp
+def set_decor
+	puts "\nWhat is the client's preferrable decor theme?"
+	print "\n> "
+	$client_details[:decor] = gets.chomp
+end
+set_decor
 
 # Output
-puts "\nName:                #{client_details[:name]}
-Age:                 #{client_details[:age]}
-Number of Children:  #{client_details[:num_children]}
-Age of Children:     #{client_details[:age_children]}
-Decor Theme:         #{client_details[:decor]}"
-# Store into variable?
+output = "\n
+Name:                #{$client_details[:name]}
+Age:                 #{$client_details[:age]}
+Number of Children:  #{$client_details[:num_children]}
+Age of Children:     #{$client_details[:age_children]}
+Decor Theme:         #{$client_details[:decor]}"
+puts output
 
 # Update a key?
 puts "\nWould you like to update any details (y/n)?"
@@ -75,62 +139,38 @@ print "\n> "
 response = gets.chomp.downcase
 if response == "n"
 	puts "\nHere are your client detials:"
-	puts "\nName:                #{client_details[:name]}
-Age:                 #{client_details[:age]}
-Number of Children:  #{client_details[:num_children]}
-Age of Children:     #{client_details[:age_children]}
-Decor Theme:         #{client_details[:decor]}"
+	puts output
 
 elsif response == "y"
 	puts "\nPlease choose which field to update:\nname | age | num_children | age_children | decor"
 	print "\n> "
 	field = gets.chomp.downcase
 	key = field.to_sym
-	if client_details.has_key?(key)
-		puts "\nWhat would you like to update their #{field} to?"
-		print "\n> "
+	if $client_details.has_key?(key)
 		case key 
 			when :name
-				update = gets.chomp
-				client_details[:name] = update
+				set_name
 			when :age 
-				update = gets.chomp.to_i
-				client_details[:age] = update
-			# :num_children & age_children have repeatable code
+				set_age
 			when :num_children
-				update = gets.chomp.to_i
-				client_details[:num_children] = update
-
-		  	puts "\nPlease update their ages as well:"
-		  	client_details[:age_children] = []
-		  	i = 1
-		  	until i > client_details[:num_children]
-		  		print"\n> "
-		  		client_details[:age_children] << gets.chomp.to_i
-		  		i += 1
-		  	end
+				set_num_children
 	  	when :age_children
-			key == :age_children
-			client_details[:age_children] = []
-			i = 1
-			until i > client_details[:num_children]
-				print"\n> "
-				client_details[:age_children] << gets.chomp.to_i
-				i += 1
-			end
+			  set_num_children
 			when :decor
-			update = gets.chomp
-			client_details[:decor] = update
+				set_decor
 	  end
 	else
 		puts "\nSorry, that's not a valid field."
 	end
+	# old output doesn't have new info bc it's pointing, not actually the value
+	output_new = "\n
+Name:                #{$client_details[:name]}
+Age:                 #{$client_details[:age]}
+Number of Children:  #{$client_details[:num_children]}
+Age of Children:     #{$client_details[:age_children]}
+Decor Theme:         #{$client_details[:decor]}"
 	puts "\nHere are the updated client details:"
-	puts "\nName:                #{client_details[:name]}
-Age:                 #{client_details[:age]}
-Number of Children:  #{client_details[:num_children]}
-Age of Children:     #{client_details[:age_children]}
-Decor Theme:         #{client_details[:decor]}"
+	puts output_new
 else
 	puts "\nSorry, that's not a valid field."
 end
