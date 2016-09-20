@@ -24,3 +24,23 @@ elsif age
 end
 =end
 
+client_details = {}
+
+puts "\nPlease enter the following details of your client:"
+puts "\nWhat is the client's name?"
+print "   > "
+client_details[:name] = gets.chomp
+
+puts "\nWhat is the client's age?"
+print "   > "
+client_details[:age] = gets.chomp.to_i
+
+puts "\nHow many children does the client have?"
+print "   > "
+client_details[:num_children] = gets.chomp.to_i
+
+puts "\nWhat is the client's preferrable decor theme?"
+print "   > "
+client_details[:decor] = gets.chomp
+
+puts "\n #{client_details}"
