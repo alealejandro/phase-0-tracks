@@ -107,29 +107,29 @@ def set_decor
 	$client_details[:decor] = gets.chomp
 end
 
+# Output
+def show_result
+	puts ""
+	$client_details.each do |field, value|
+		puts "#{field.capitalize}:".ljust(14) + "#{value}".rjust(14)
+	end
+end
+
 puts "\nPlease enter the following details of your client:"
 set_name
 set_age
 set_num_children
 set_age_children
 set_decor
-
-# Output
-output = "\n
-Name:                #{$client_details[:name]}
-Age:                 #{$client_details[:age]}
-Number of Children:  #{$client_details[:num_children]}
-Age of Children:     #{$client_details[:age_children]}
-Decor Theme:         #{$client_details[:decor]}"
-puts output
+show_result
 
 # Update a key?
 puts "\nWould you like to update any details (y/n)?"
 print "\n> "
 response = gets.chomp.downcase
 if response == "n"
-	puts "\nHere are your client detials:"
-	puts output
+	puts "\nHere are your client details:"
+	show_result
 elsif response == "y"
 	puts "\nPlease choose which field to update:\nname | age | num_children | age_children | decor"
 	print "\n> "
@@ -153,14 +153,8 @@ elsif response == "y"
 		puts "\nSorry, that's not a valid field."
 	end
 	# old output doesn't have new info bc it's pointing, not actually the value
-	output_new = "\n
-Name:                #{$client_details[:name]}
-Age:                 #{$client_details[:age]}
-Number of Children:  #{$client_details[:num_children]}
-Age of Children:     #{$client_details[:age_children]}
-Decor Theme:         #{$client_details[:decor]}"
-	puts "\nHere are the updated client details:"
-	puts output_new
+	puts "\nHere are your updated client details:"
+	show_result
 else
 	puts "\nSorry, that's not a valid field."
 end
