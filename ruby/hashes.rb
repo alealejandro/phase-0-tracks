@@ -1,7 +1,5 @@
 $client_details = {}
 
-puts "\nPlease enter the following details of your client:"
-
 # Name
 def set_name
 	valid = false
@@ -25,7 +23,23 @@ def set_name
 	end
 	$client_details[:name] = name
 end
-set_name
+
+# Input validation for integers
+def check_digits(input)
+	check_array = input.scan(/./)
+	i = 0
+	until i == check_array.length
+		if check_array[i].match(/[[:digit:]]/)
+			i += 1
+			valid = true
+		else 
+			puts "\nInvalid."
+			valid = false
+			break
+		end
+	end
+	return valid
+end
 
 # Age
 def set_age
@@ -36,30 +50,18 @@ def set_age
 		age = gets.chomp
 
 		# Check if input is integer
-		age_check_array = age.scan(/./)
-		i = 0
-		until i == age_check_array.length
-			if age_check_array[i].match(/[[:digit:]]/)
-				i += 1
-				valid = true
-			else
-				puts "\nInvalid."
+		if check_digits(age) == true
+			age = age.to_i
+			if age <= 0
+				puts "\nInvalid"
 				valid = false
-				break
+			else
+				$client_details[:age] = age
+				valid = true
 			end
 		end
-	  age = age.to_i
-
-	  # Check if age is > 0 years old
-	  if age <= 0
-	  	puts "\nInvalid."
-	  	valid = false
-	  else
-	  	$client_details[:age] = age
-	  end
 	end
 end
-set_age
 
 # Number of children
 def set_num_children
@@ -70,51 +72,33 @@ def set_num_children
 	  num_children = gets.chomp
 
 	  # Check if input is an integer
-	  num_children_check_array = num_children.scan(/./)
-	  i = 0
-		until i == num_children_check_array.length
-			if num_children_check_array[i].match(/[[:digit:]]/)
-				i += 1
-				valid = true
-			else
-				puts "\nInvalid."
-				valid = false
-				break
-			end
+	  if check_digits(num_children) == true
+			num_children = num_children.to_i
+			$client_details[:num_children] = num_children
+			valid = true
 		end
-		num_children = num_children.to_i
-		$client_details[:num_children] = num_children
 	end
-	# Age of children
-	if num_children > 0
+end
+
+# Age of children
+def set_age_children
+	if $client_details[:num_children] > 0
 		puts "\nHow old are they?"
 		$client_details[:age_children] = []
 		nth_child = 1 
-		until (nth_child > num_children)
+		until nth_child > $client_details[:num_children]
 			i = 0
 			print"\n> "
 			age = gets.chomp
-			age_check_array = age.scan(/./)
-			until i == age_check_array.length
-				if age_check_array[i].match(/[[:digit:]]/)
-					i += 1
-				else
-					puts "\nInvalid."
-					break
-				end
-				# where to set valid = true
-				if i == age_check_array.length # passed through string checker, then
-					age = age.to_i
-					$client_details[:age_children] << age
-					nth_child += 1
-				end
+
+			if check_digits(age) == true
+			  age = age.to_i
+			  $client_details[:age_children] << age
+			  nth_child += 1
 			end 
 		end
 	end
 end
-set_num_children
-
-
 
 # Decor Theme
 def set_decor
@@ -122,6 +106,12 @@ def set_decor
 	print "\n> "
 	$client_details[:decor] = gets.chomp
 end
+
+puts "\nPlease enter the following details of your client:"
+set_name
+set_age
+set_num_children
+set_age_children
 set_decor
 
 # Output
@@ -140,7 +130,6 @@ response = gets.chomp.downcase
 if response == "n"
 	puts "\nHere are your client detials:"
 	puts output
-
 elsif response == "y"
 	puts "\nPlease choose which field to update:\nname | age | num_children | age_children | decor"
 	print "\n> "
@@ -154,8 +143,9 @@ elsif response == "y"
 				set_age
 			when :num_children
 				set_num_children
+				set_age_children
 	  	when :age_children
-			  set_num_children
+			  set_age_children
 			when :decor
 				set_decor
 	  end
