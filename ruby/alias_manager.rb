@@ -4,12 +4,11 @@
 # Convert string to an array
 # Figure out whether a letter is a vowel
 # How to deal with uppercase
-# How to handle edge cases
+# How to handle edge cases (u, z)
 
 name = "Felicia Torres"
 # switch to downcase, split into array of words
-name_down = name.downcase
-names_array = name_down.split(' ')
+names_array = name.downcase.split(' ')
 # switch first & last names
 first_name = names_array[1]
 last_name = names_array[0]
@@ -17,38 +16,54 @@ last_name = names_array[0]
 first_name_array = first_name.chars
 last_name_array = last_name.chars
 
-str = "felicia"
-# Letter changer
-#def letter_changer(str_array)
-str_array = str.chars
+def name_changer(full_name)
+	names_array = full_name.downcase.split(' ')
+	new_name = ""
+	names_array.each do |name|
+		new_name << "#{letter_changer(name).capitalize} "
+	end
+	new_name.split(' ')
+	puts new_name
+	# Change positions of f & l names
+end
+
+def letter_changer(str_array)
 	vowels = ['a', 'e', 'i', 'o', 'u']
-	new_str_array = ""
+	new_str = ""
 	i = 0
 	until i == str_array.length
 		letter = str_array[i]
 		if vowels.include? letter
 			if letter == vowels[0]
-				new_str_array << vowels[1]
+				new_str << vowels[1]
 			elsif letter == vowels[1]
-				new_str_array << vowels[2]
+				new_str << vowels[2]
 			elsif letter == vowels[2]
-				new_str_array << vowels[3]
+				new_str << vowels[3]
 			elsif letter == vowels[3]
-				new_str_array << vowels[4]
+				new_str << vowels[4]
 			else
-				new_str_array << vowels[0]
+				new_str << vowels[0]
 			end
 		else # consonant
-			letter = letter.next
-			if vowels.include? letter
+			if letter == "z"
+				letter = "b"
+			else
 				letter = letter.next
-		  end
-		  new_str_array << letter
+				if vowels.include? letter
+					letter = letter.next
+		    end
+		  new_str << letter
+			end
 		end
 		i += 1
 	end
-	puts new_str_array
-#end
-#def letter_changer(first_name_array)
-
+	new_str
+end
+puts "#{name} has been changed to: "
+name_changer(name)
+# Instead of interpolation, maybe split by word and switch their indexes inside method
+# Instead of capitalization in interpolation, maybe capitalize within method by split word
+# All within one method
+# - A method can call other methods
   			
