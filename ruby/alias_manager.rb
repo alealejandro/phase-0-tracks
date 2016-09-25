@@ -7,14 +7,6 @@
 # How to handle edge cases (u, z)
 
 name = "Felicia Torres"
-# switch to downcase, split into array of words
-names_array = name.downcase.split(' ')
-# switch first & last names
-first_name = names_array[1]
-last_name = names_array[0]
-# create array of characters for first & last names
-first_name_array = first_name.chars
-last_name_array = last_name.chars
 
 def name_changer(full_name)
 	names_array = full_name.downcase.split(' ')
@@ -22,8 +14,10 @@ def name_changer(full_name)
 	names_array.each do |name|
 		new_name << "#{letter_changer(name).capitalize} "
 	end
-	new_name.split(' ')
-	puts new_name
+	new_name_array = new_name.split(' ') # string
+	first = new_name_array[1]
+	last = new_name_array[0]
+	puts "#{first} #{last}"
 	# Change positions of f & l names
 end
 
