@@ -1,23 +1,12 @@
-# Swap the first & last name
-# Change vowels to next vowel, all consonants to next consonant
-
-# Convert string to an array
-# Figure out whether a letter is a vowel
-# How to deal with uppercase
-# How to handle edge cases (u, z)
-
-name = "Felicia Torres"
-
 def name_changer(full_name)
 	names_array = full_name.downcase.split(' ')
 	new_name = []
 	names_array.each do |name|
-		new_name << "#{letter_changer(name).capitalize} " #new_str capitalize goes into new_name array
+		new_name << "#{letter_changer(name).capitalize}" 
 	end
 	first = new_name[1]
 	last = new_name[0]
-	puts "\n#{full_name} has been changed to: "
-	puts "#{first}#{last}"
+	puts "\n#{full_name} > #{first} #{last}"
 end
 
 def letter_changer(name)
@@ -25,7 +14,7 @@ def letter_changer(name)
 	new_str = ""
 	i = 0
 	while i < name.length
-		letter = name[i] # iterating through string name 
+		letter = name[i] # iterating through string
 		if vowels.include? letter # if vowel,
 			if letter == vowels[0]
 				new_str << vowels[1]
@@ -53,4 +42,41 @@ def letter_changer(name)
 	end
 	new_str
 end
-name_changer(name)
+
+def set_name
+	valid = false
+	until valid
+		puts "\nEnter a name or 'quit'" 
+		print "\n> "
+		name = gets.chomp
+
+		name_check_array = name.scan(/./)
+		i = 0
+		while i < name_check_array.length
+			if name_check_array[i].match(/[[:alpha:]]/) || name_check_array[i].match(/[[:blank:]]/)
+				i += 1
+				valid = true
+			else
+				puts "\nInvalid."
+				valid = false
+				break
+			end
+		end
+		if name == "quit"
+			valid = true
+			break
+		end
+	end
+	$name = name
+end
+
+# Can only work on a full name of 0, 1, 2 names
+$name = ""
+while $name != "quit"
+	set_name
+	if $name == "quit"
+		print 
+	else
+		name_changer($name)
+	end
+end
