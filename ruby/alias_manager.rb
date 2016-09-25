@@ -10,24 +10,23 @@ name = "Felicia Torres"
 
 def name_changer(full_name)
 	names_array = full_name.downcase.split(' ')
-	new_name = ""
+	new_name = []
 	names_array.each do |name|
-		new_name << "#{letter_changer(name).capitalize} "
+		new_name << "#{letter_changer(name).capitalize} " #new_str capitalize goes into new_name array
 	end
-	new_name_array = new_name.split(' ') # string
-	first = new_name_array[1]
-	last = new_name_array[0]
-	puts "#{first} #{last}"
-	# Change positions of f & l names
+	first = new_name[1]
+	last = new_name[0]
+	puts "\n#{full_name} has been changed to: "
+	puts "#{first}#{last}"
 end
 
-def letter_changer(str_array)
+def letter_changer(name)
 	vowels = ['a', 'e', 'i', 'o', 'u']
 	new_str = ""
 	i = 0
-	until i == str_array.length
-		letter = str_array[i]
-		if vowels.include? letter
+	while i < name.length
+		letter = name[i] # iterating through string name 
+		if vowels.include? letter # if vowel,
 			if letter == vowels[0]
 				new_str << vowels[1]
 			elsif letter == vowels[1]
@@ -36,28 +35,22 @@ def letter_changer(str_array)
 				new_str << vowels[3]
 			elsif letter == vowels[3]
 				new_str << vowels[4]
-			else
+			elsif letter == vowels[4]
 				new_str << vowels[0]
 			end
-		else # consonant
-			if letter == "z"
+		else # if consonant,
+			letter = letter.next 
+			# had to do this first rather than checking letter == "z", otherwise "z"s got skipped over
+			if letter == "aa"
 				letter = "b"
-			else
+			elsif
+				vowels.include? letter
 				letter = letter.next
-				if vowels.include? letter
-					letter = letter.next
-		    end
+		  end
 		  new_str << letter
-			end
 		end
 		i += 1
 	end
 	new_str
 end
-puts "#{name} has been changed to: "
 name_changer(name)
-# Instead of interpolation, maybe split by word and switch their indexes inside method
-# Instead of capitalization in interpolation, maybe capitalize within method by split word
-# All within one method
-# - A method can call other methods
-  			
