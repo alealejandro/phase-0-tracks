@@ -40,7 +40,7 @@ p fib(100).last
 Bubble Sort
 - Visualization & youtube videos helped me understand this concept
 - I was interested to understand how it works, but have trouble seeing applications for bubble sorting other than with an integer array
-- Implementation was difficult, looping didn't work as I wanted & was hard to see how I could iterate instead
+- Implementation was difficult, looping didn't work as I wanted & was hard to see how iteration could be better
 - As I began pseudocoding, I noticed it pretty much translates straight to ruby:
 
 create method that bubble sorts an array
@@ -69,7 +69,8 @@ def bubble sort method(array)
 end
 
 - while doesn't seem to work so I'll iterate
-- Didn't recognize: Loop within a loop
+  - But why doesn't while work?
+- Didn't recognize: Loop within a loop, so tried to implement
 
 def bubble_sort(array)
 	keep_going = true
@@ -90,7 +91,7 @@ p bubble_sort(ar)
 
 - Started to want to look for solutions
 - Couldn't see why the logic wasn't working 
-- Desparate to understand why
+- Desparation - why doesn't my code work?
 
 def bubble_sort(array)
 	keep_going = true
@@ -113,6 +114,11 @@ p bubble_sort(ar)
 - Now the value at index 0 gets changed with the value at index 1, but DOESNT KEEP GOING
 - NO OTHER INDEXES get changed as well
 
+After Answer Lookup:
+
+******************Reflection:******************
+
+**********************************
 - Understood
   - Iterate through each index in array.length - 1
     - Check if value at current index > value at next index
@@ -131,21 +137,32 @@ p bubble_sort(ar)
     ERROR
       [0, 1, 2, 3]
 
-		- So none of my loops seem to be working, even though I implemented a loop within a loop
-		
+		- So NONE OF MY LOOPS ARE WORKING, even though I implemented a loop within a loop and even if the logic looks like it makes sense 
+		  - I don't get why my logic failed
+		  - I don't fully understand loops then
+		  - Even after looking at the answer, I don't see a difference in logic/implementation other than the literal code
+		  - Need to track indexes separately?
+		- Seem to recognize error locations
+		- loop do seems to do a good job repetitively doing something until a break; but this seems similar to while a condition...
+************************************
 - Confused
   - Why iterate & not use a loop?
-  - why does array.each_index do |i| not work
-		- why use num & times
+  - why does array.each_index do |i| not work?
+		- why does array.length - 1.times do |i| work?
 	- why didn't my if-else statement that changed the keep_going not work
 	  - why does loop do work?
-	  	- * * * INFINITE UNTIL BREAK * * *
+	  	- INFINITE UNTIL BREAK
+	  	- Both are conditional & should keep running:
+	  	  - until keep_going == false
+	  	    if less than next value, keep_going = false, go to next index & begin comparisons again
+	  	  - loop do ... break if not sorted
 	- why didn't until condition (keep_going) not work?
 	  - why do we have to loop do instead & break if not sorted
 	- LOOPING
 	- CONDITIONAL FLOW
 	- ITERATORS
 	- I thought I had these concepts down, but when implementing, produces UNEXPECTED results
+************************************
 
 =end
 
