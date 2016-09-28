@@ -1,6 +1,8 @@
 # Business Logic
 
 class Santa
+	attr_accessor :gender, :age, :ethnicity
+	# All accessors bc build_many_santas
 
 	def initialize(gender, ethnicity)
 		puts "Initializing Santa instance..."
@@ -28,57 +30,30 @@ class Santa
   	@reindeer_ranking.push(reindeer_name)
   	@reindeer_ranking
   end
+end 
 
-  def gender=(new_gender)
-  	@gender = new_gender
-  end
-
-  def age
-  	@age
-  end
-
-  def ethnicity
-  	@ethnicity
-  end
-
-end
-
-def prompt_user
+def build_many_santas(int)
 	santas = []
-	loop do
-		puts "Specify new santa's gender & ethnicity (delimited by a space) or type 'done' to exit:"
-		print "\n> "
-		santa_input = gets.chomp
-		break if santa_input == "done"
-		temp_array = santa_input.split(' ')
-		santa = Santa.new(temp_array[0], temp_array[1])
-		santas << santa
+	example_genders = ["agender", "female", "bigender", "male", "female", "gender fluid", "N/A"]
+	example_ethnicities = ["black", "Latino", "white", "Japanese-African", "prefer not to say", "Mystical Creature (unicorn)", "N/A"]
+	i = 1
+	until i == int
+		santa = Santa.new(example_genders.sample, example_ethnicities.sample)
+	santa.age = Random.new.rand(1...140)
+	santas << santa
+	i += 1
 	end
-	p santas
+	santas
 end
 
-def display_santas(list)
-	list.each do |santa|
-		puts "Gender: #{@gender}"
-		puts "Ethnicity: #{@ethnicity}"
-	end
+def print_attributes(list_of_santas)
+	list_of_santas.each do |santa|
+		print "#{santa.gender}, #{santa.ethnicity}, #{santa.age}\n\n"
+	end	
 end
-  
 
 # Driver code
 
-#list_of_santas = prompt_user
-#display_santas(list_of_santas)
-nick = Santa.new("male", "black")
-p nick.celebrate_birthday
-p nick.get_mad_at("Vixen")
-p nick.age
-p nick.ethnicity
-
-
-=begin
-nick = Santa.new("male", "black")
-nick.about
-nick.speak
-nick.eat_milk_and_cookies("chocolate chip")
-=end
+lots_of_santas = build_many_santas(10)
+puts 
+print_attributes(lots_of_santas)
