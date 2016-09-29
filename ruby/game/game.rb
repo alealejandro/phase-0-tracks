@@ -1,5 +1,4 @@
 =begin
-	
 Create a word-guessing game class
   - Driver code will handle I/O (gets.chomp & converting)
     - Class is for computer, Driver is for human to computer translation
@@ -45,25 +44,25 @@ Create a word-guessing game class
 	      Is the num_guess > input.length - 1?
 	        IF so, you lose
 	        Otherwise, keep guessing
-
 =end
 
 class Game
-	attr_accessor :secret, :feedback, :secret_array, :guess_count, :is_over, :guesses_allowed
+	attr_accessor :guess_count, :is_over, :guesses_allowed, :feedback
 
 	def initialize
 		@guess_count = 0
 		@is_over = false
 		@secret = ""
 		@feedback = []
+		@guesses = []
 	end
 
 	def set_secret(word)
 		@secret = word
 		@secret_array = @secret.chars
-		@guesses_allowed = word.length
+		@guesses_allowed = @secret_array.uniq.length
 		set_feedback
-		@secret
+		@secret #rspec
 	end
 
   def set_feedback
@@ -78,37 +77,43 @@ class Game
   	end
   end
 
-	def guess_letter(letter)
-		puts
-		@guess_count += 1
-		if @guess_count <= @secret.length
-			# allow to guess
-			@secret_array.each_index do |i|
-				if @secret_array[i] == letter
-					@feedback[i] = letter
-				end
+  def revise_feedback(letter)
+		@secret_array.each_index do |i|
+			if @secret_array[i] == letter
+				@feedback[i] = letter
 			end
-			display_feedback
-			puts
-		else
-			# end guessing
-			@is_over = true
-			puts
-			puts " Ha! You've lost! ".center(40, '-')
 		end
 	end
 
 	def check_over
-		if @feedback.include?("_") == false
-			@is_over = true
+		if !@feedback.include?("_")
 			puts 
 			puts " Congrats! You've won! ".center(40, '-')
+			@is_over = true
+		elsif @guess_count > @guesses_allowed
+			puts
+			puts " Ha! You've lost! ".center(40, '-')
+			@is_over = true
 		else
 			@is_over = false
 		end
 	end
-end
 
+	def check_used_before(letter)
+		if @guesses.include?(letter)
+			true
+		end
+	end
+
+	def guess_letter(letter)
+		puts
+		@guess_count += 1
+		@guesses << letter
+		revise_feedback(letter)
+		display_feedback
+		puts
+	end
+end
 
 puts 
 puts " Welcome to the Guessing Game ".center(40, '-')
@@ -123,13 +128,21 @@ game.set_secret(input)
 puts 
 
 puts " User 2 ".center(20, '-').center(30)
+puts
+game.display_feedback
+puts
 game.guess_count += 1
 while !game.is_over
+	game.check_over
+	break if game.is_over
+	# if check_over @is_over = false, then
   puts "\nGuess Count: #{game.guess_count} / #{game.guesses_allowed}"
 	puts "Please enter a letter to guess:"
 	print "\n> "
 	guess = gets.chomp
+	if game.check_used_before(guess)
+		next
+	else
 	game.guess_letter(guess)
-	break if game.is_over
-	game.check_over
+	end
 end
