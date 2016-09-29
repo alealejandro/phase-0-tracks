@@ -49,45 +49,87 @@ Create a word-guessing game class
 =end
 
 class Game
-	attr_accessor :secret, :guessed_secret, :secret_array
+	attr_accessor :secret, :feedback, :secret_array, :guess_count, :is_over, :guesses_allowed
 
 	def initialize
 		@guess_count = 0
 		@is_over = false
 		@secret = ""
-		@guessed_secret = ""
+		@feedback = []
 	end
 
-	def set_secret
+	def set_secret(word)
+		@secret = word
 		@secret_array = @secret.chars
-		@secret_array.each do 
-			@guessed_secret += "_ "
-		end
-		@guessed_secret	
+		@guesses_allowed = word.length
+		set_feedback
+		@secret
 	end
+
+  def set_feedback
+		@secret_array.each do 
+			@feedback << "_"
+		end
+  end
+
+  def display_feedback
+  	@feedback.each do |char|
+  		print "#{char} "
+  	end
+  end
 
 	def guess_letter(letter)
-		@secret_array.each_index do |i|
-			if @secret_array[i] == letter
-				# update guessed_secret
+		puts
+		@guess_count += 1
+		if @guess_count <= @secret.length
+			# allow to guess
+			@secret_array.each_index do |i|
+				if @secret_array[i] == letter
+					@feedback[i] = letter
+				end
 			end
+			display_feedback
+			puts
+		else
+			# end guessing
+			@is_over = true
+			puts
+			puts " Ha! You've lost! ".center(40, '-')
 		end
-		# return guessed_secret
 	end
 
+	def check_over
+		if @feedback.include?("_") == false
+			@is_over = true
+			puts 
+			puts " Congrats! You've won! ".center(40, '-')
+		else
+			@is_over = false
+		end
+	end
 end
 
+
+puts 
 puts " Welcome to the Guessing Game ".center(40, '-')
 game = Game.new
+puts 
 
-puts "\nUser 1: Please enter a word to guess:"
+puts " User 1 ".center(20, '-').center(30) 
+puts "\nPlease enter a word to guess:"
 print "\n> "
-game.secret = gets.chomp
-puts "Secret word: #{game.secret}"
+input = gets.chomp
+game.set_secret(input)
+puts 
 
-puts "\nUser 2, you're up!"
-puts game.set_secret
-puts "\nUser 2: Please enter a letter to guess:"
-print "\n> "
-#guess = gets.chomp
-#game.guess_letter(guess)
+puts " User 2 ".center(20, '-').center(30)
+game.guess_count += 1
+while !game.is_over
+  puts "\nGuess Count: #{game.guess_count} / #{game.guesses_allowed}"
+	puts "Please enter a letter to guess:"
+	print "\n> "
+	guess = gets.chomp
+	game.guess_letter(guess)
+	break if game.is_over
+	game.check_over
+end
