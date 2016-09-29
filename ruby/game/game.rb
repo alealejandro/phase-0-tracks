@@ -49,13 +49,45 @@ Create a word-guessing game class
 =end
 
 class Game
+	attr_accessor :secret, :guessed_secret, :secret_array
 
 	def initialize
 		@guess_count = 0
 		@is_over = false
+		@secret = ""
+		@guessed_secret = ""
+	end
+
+	def set_secret
+		@secret_array = @secret.chars
+		@secret_array.each do 
+			@guessed_secret += "_ "
+		end
+		@guessed_secret	
+	end
+
+	def guess_letter(letter)
+		@secret_array.each_index do |i|
+			if @secret_array[i] == letter
+				# update guessed_secret
+			end
+		end
+		# return guessed_secret
 	end
 
 end
 
-puts "Welcome to "
+puts " Welcome to the Guessing Game ".center(40, '-')
 game = Game.new
+
+puts "\nUser 1: Please enter a word to guess:"
+print "\n> "
+game.secret = gets.chomp
+puts "Secret word: #{game.secret}"
+
+puts "\nUser 2, you're up!"
+puts game.set_secret
+puts "\nUser 2: Please enter a letter to guess:"
+print "\n> "
+#guess = gets.chomp
+#game.guess_letter(guess)
