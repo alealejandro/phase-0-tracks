@@ -74,7 +74,11 @@ console.log(bubbleSort(ar));
       // Move to right of pivot point
 */
 
+
+
 ////////// Release 1: Find a Key-Value Match //////////
+
+
 
 /* Initial Pseudocode
   // Function takes 2 objects
@@ -99,6 +103,7 @@ console.log(bubbleSort(ar));
 */
 
 // Break into smaller pieces 
+
 /* First, check if I can access key value pairs of an object:
 	var person = {name: 'jim', age: 21};
 
@@ -134,3 +139,37 @@ var match_kv = function(obj1, obj2) {
   return match;
 }
 console.log(match_kv(person1, person2));
+
+
+
+////////// Release 2: Generate Random Test Data //////////
+
+
+
+/* Initial Pseudocode
+  //  Function that takes an integer for length, builds & returns an array of strings of the given length
+
+  //  Example: arg = 3, we get an array of 3 random words back, which are of randomly varying length between 1 & 10
+
+    //  Input: 
+      //  Integer that indicates length of array
+    //  Steps:
+      //  Create an empty array
+      //  Make a counter 
+      //  Until counter hits integer input
+        //  For each count
+          //  Choose length of word
+          //  Choose letters from alphabet until satisfies length of word
+          //  Put a randomly generated word into the array
+          //  Increment counter
+    //  Output: 
+      //  Array of length (input) 
+      //  Contains gibberish strings of 1 <= string length <= 10
+*/
+
+var rand_array_generator = function(input_length) {
+	output_array = [];
+	for (i = 0; i < input_length; i++) {
+		
+	}
+}
