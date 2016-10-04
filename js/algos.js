@@ -37,18 +37,16 @@
 var ar = [1, 3, 2, 4, 8, 0];
 
 var bubbleSort = function(array) {
-  for (i = 0; i < array.length; i++) {
-  	// for each item in array,
-  	// compare to next item
-  	if (array[i] < array[i+1]) {
-  		continue;
-  		// go to next iteration, next index
-  	}
-  	else if (array[i] > array[i+1]) {
-  		temp = array[i]; // store bigger value
-  		array[i] = array[i+1]; // make smaller index have smaller value
-  		array[i+1] = temp; // make bigger index have bigger value
-  	}
+	for (j = 0; j < array.length; j++) { 
+	// Outer, how many times to iterate through array
+	  for (i = 0; i < array.length; i++) { 
+	  // Inner, to compare elements
+	  	if (array[i] > array[i+1]) {
+	  		temp = array[i]; // store bigger value
+	  		array[i] = array[i+1]; // smaller index gets smaller value
+	  		array[i+1] = temp; // bigger index gets bigger value
+	  	}
+	  }
   }
   return array;
 }
