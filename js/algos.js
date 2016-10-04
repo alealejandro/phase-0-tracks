@@ -70,6 +70,7 @@ var bubbleSort = function(array) {
 };
 
 console.log(bubbleSort(ar));
+console.log();
 
 /* QuickSort Pseudocode after BubbleSort Implementation
   // Finds a pivot point
@@ -127,7 +128,7 @@ console.log(bubbleSort(ar));
 var person1 = {name: 'jim', age: 21, hasDog: true};
 var person2 = {name: 'mike', age: 21, hasDog: false};
 
-var match_kv = function(obj1, obj2) {
+var matchKeyValuePairs = function(obj1, obj2) {
 	match = false;
 	// If there are no matches, then return false
   for (var key1 in obj1) {
@@ -147,7 +148,9 @@ var match_kv = function(obj1, obj2) {
   }
   return match;
 }
-console.log(match_kv(person1, person2));
+
+console.log(matchKeyValuePairs(person1, person2));
+console.log();
 
 
 
@@ -176,7 +179,7 @@ console.log(match_kv(person1, person2));
       //  Contains gibberish strings of 1 <= string length <= 10
 */
 
-var generate_rand_array = function(input_length) {
+var generateRandArray = function(input_length) {
 	output_array = [];
 	// Create empty array to fill words into, for output
 	alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
@@ -199,4 +202,22 @@ var generate_rand_array = function(input_length) {
 	return output_array;
 }
 
-console.log(generate_rand_array(3));
+console.log(generateRandArray(3));
+console.log();
+
+for (counter = 0; counter < 10; counter++) {
+// Do the following 10 times
+// Counter variable CANNOT be the same as any counter of functions
+	random_array = generateRandArray(3);
+	// Store return value of generateRandArray
+	console.log(counter+1);
+	// Display which count
+  console.log(random_array);
+  // Display
+  largest_value = bubbleSort(random_array);
+  // Store return value of bubbleSort
+  console.log(largest_value);
+  // Display 
+  console.log();
+};
+
