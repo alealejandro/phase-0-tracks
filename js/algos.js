@@ -72,7 +72,7 @@ var bubbleSort = function(array) {
 console.log(bubbleSort(ar));
 console.log();
 
-/* QuickSort Pseudocode after BubbleSort Implementation
+/* QuickSort Pseudocode after BubbleSort Implementation ? TBC
   // Finds a pivot point
     // If <= pivot point
       // Move to left of pivot point
@@ -128,7 +128,7 @@ console.log();
 var person1 = {name: 'jim', age: 21, hasDog: true};
 var person2 = {name: 'mike', age: 21, hasDog: false};
 
-var matchKeyValuePairs = function(obj1, obj2) {
+var matchKVPairs = function(obj1, obj2) {
 	match = false;
 	// If there are no matches, then return false
   for (var key1 in obj1) {
@@ -149,7 +149,7 @@ var matchKeyValuePairs = function(obj1, obj2) {
   return match;
 }
 
-console.log(matchKeyValuePairs(person1, person2));
+console.log(matchKVPairs(person1, person2));
 console.log();
 
 
