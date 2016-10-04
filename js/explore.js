@@ -6,14 +6,17 @@
   // returns new string
   // print return value of function
 
-var str = "Loop";
-
 function reverse(string) {
-	var revStr = "";
+	var result = "";
 	for (var i = string.length - 1; i >= 0; i--) {
-    revStr += string[i];
+    result += string[i];
 	}
-	return revStr;
+	return result;
 }
+	
+var str = "JavaScript";
+var revStr = reverse(str);
 
-console.log(reverse(str));
+if (1 === 1) {
+	console.log(revStr);
+}
