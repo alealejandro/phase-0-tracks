@@ -53,14 +53,19 @@ var ar = ["a", "abc", "abcd", "abcdef", "ab", "abcde"];
 
 var bubbleSort = function(array) {
 	for (j = 0; j < array.length - 1; j++) {
+	// outer loop keeps track of # overall iterations in supplied array
 		for (i = 0; i < array.length - 1; i++) {
+		// inner loop keeps track of # comparisons done by given word
 			if (array[i].length > array[i+1].length) {
+			// if the given word is longer than the next word, flip values
 				temp = array[i];
+				// Need to temporarily hold a value, so we can flip values
 				array[i] = array[i+1];
 				array[i+1] = temp;
 			};
 		};
 	return array[array.length - 1];
+	// Returns the last word (longest) of the array
   };
 };
 
@@ -124,12 +129,16 @@ var person2 = {name: 'mike', age: 21, hasDog: false};
 
 var match_kv = function(obj1, obj2) {
 	match = false;
+	// If there are no matches, then return false
   for (var key1 in obj1) {
+  	// For a given property in obj1, 
   	//console.log("For " + key1 + " in obj1");
   	for (var key2 in obj2) {
+  	// Check against all properties of obj2
   		//console.log("  " + key2 + " in obj2");
   		if (key1 == key2) {
   			if (obj1[key1] == obj2[key2]) {
+  			// If a key in obj2 matches current obj1 key, and their values also match, then return true
   				//console.log("\nMATCHED\n");
   				match = true;
   			}
@@ -167,9 +176,27 @@ console.log(match_kv(person1, person2));
       //  Contains gibberish strings of 1 <= string length <= 10
 */
 
-var rand_array_generator = function(input_length) {
+var generate_rand_array = function(input_length) {
 	output_array = [];
-	for (i = 0; i < input_length; i++) {
-		
+	// Create empty array to fill words into, for output
+	alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
+	// Store alphabet into an accessible array
+	for (i = 0; i < input_length; i++) { 
+	// For each word,
+		str_length = Math.floor(Math.random() * 10) + 1;
+		// Select how long that word will be (btw 1 & 10)
+		word = "";
+		for (j = 0; j < str_length; j++) {
+		// For each letter in that word,
+      letter_index = Math.floor(Math.random() * 26);
+      word += alphabet[letter_index];
+      // Add the letter at a random index of the alphabet array to create a word, until you reach the randomly selected length of word
+		}
+		output_array.push(word);
+		// After creating a word, add that word to the output array
+		// Then, create a new word until hitting the argument, specifying the number of words needed
 	}
+	return output_array;
 }
+
+console.log(generate_rand_array(3));
