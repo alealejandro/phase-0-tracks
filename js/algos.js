@@ -92,19 +92,42 @@ console.log(bubbleSort(ar));
 			        // Go to next property of obj1
 			        // Check 2nd property of obj1 against all properties of obj2
 			        // LOOP
-	    // Need 3 loops
+	    // Need 2 loops
 	      // Outer to go through each property of obj1
-	      // Middle to check given property of obj1 against all properties of obj2
-	      // Inner to go through all properties of obj2
+	      // Inner to check given property of obj1 against all properties of obj2
 	    // Work from in >>> out
 	  // Output: boolean
 */
+
+// Break into smaller pieces 
+
+// First, check if I can access key value pairs of an object:
+
 var person = {name: 'jim', age: 21};
 
-var searchMatch = function(object) {
+var access_each_kv = function(object) {
   for (var property in object) {
   	value = object[property]
-		console.log(property + " >>> " + value);
+		console.log(property + ": " + value);
   }
 }
-searchMatch(person);
+access_each_kv(person);
+console.log();
+
+// Seems to work, so now check if I can match
+
+var person1 = {name: 'jim', age: 21, hasDog: true};
+var person2 = {name: 'mike', age: 21, hasDog: true};
+
+var match_kv = function(obj1, obj2) {
+  for (var key1 in obj1) {
+  	for (var key2 in obj2) {
+  		if (key1 == key2) {
+  			if (obj1[key1] == obj2[key2]) {
+  				console.log(key1 + ": " + obj1[key1]);
+  			} 
+  		}
+  	}
+  }
+}
+match_kv(person1, person2);
