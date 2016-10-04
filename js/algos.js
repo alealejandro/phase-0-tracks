@@ -1,4 +1,4 @@
-// Release 0
+////////// Release 0 //////////
 
   // Function that takes an array of words/phrases & returns the longest word/phrase in the array
     // Input: Bunch of words
@@ -11,28 +11,10 @@
 	        // Compare first element with second,
 	          // If first item is greater, compare with 3rd
 	          // If second item is greater, compare with 3rd
-	          // etc.
-
-      // QuickSort
-        // Find a pivot, which divides the array into 2 halves, where left is smaller than pivot, right is larger
-          // 1. Find pivot that divides the array into 2 halves
-          // 2. Quick sort the left half
-          // 3. Quick sort the right half
-
+	          // etc
     // Output: Longest word
 
-// Analogy using numbers so more basic:
-  // For each item in array
-    // Starting with first item, 
-    // Compare item at index with item at next index
-      // If item at next index is greater
-        // Don't flip
-      // If item at next index is smaller
-        // Flip
-    // After comparison,
-      // Rechoose index as next index
-      // Compare again
-      // Loop until at final index
+// Analogy function using numbers so more basic to test idea
 
 var ar = [1, 3, 2, 4, 8, 0];
 
@@ -53,30 +35,29 @@ var bubbleSort = function(array) {
 
 console.log(bubbleSort(ar));
 
+// Function to sort array of words
+  // Outer loop that goes iterates the inner loop for each word in array
+    // Inner loop that actually compares
+      // If the length of word at the current index > length of word at next index
+        // Trade places
+  // Return the last word from updated array
 
-/*
-var array1 = ['a', 'abc', 'abcd', 'ab'];
-var array2 = []
+// while < array.length - 1 (because edge case comparison nil)
+  // Worked in numbers analogy because nil >> 0 falsey
 
-var find_largest = function(array) {
-	for (i=0; i < array.length; i++) { // for each word in array
-    array2.push(array[i].length);  // store word length in new array
-  }
-  for (i=0; i < array2.length; i++) { 
-  // for each length in new array
-  // Compare with next index
-    // If next index < current index
-      // Switch positions
-      // Next iteration
-    // If next index > current index
-      // Maintain positions
-      // Skip to next iteration so that i = current i + 1
-    if (array2[i] > array2[i+1])
+var ar = ["a", "abc", "abcd", "abcdef", "ab", "abcde"];
 
-
-  }
-  return array2;
+var bubbleSort = function(array) {
+	for (j = 0; j < array.length - 1; j++) {
+		for (i = 0; i < array.length - 1; i++) {
+			if (array[i].length > array[i+1].length) {
+				temp = array[i];
+				array[i] = array[i+1];
+				array[i+1] = temp;
+			};
+		};
+	return array[array.length - 1];
 };
 
-console.log(find_largest(array1));
-*/
+console.log(bubbleSort(ar));
+
