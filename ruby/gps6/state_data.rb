@@ -1,8 +1,7 @@
 #population density is number of people per square mile as of 2012
 #this data is updated every year with estimates from a 10 year census
-
-
 STATE_DATA = {
+  # symbol v. generic
   "Alabama" => {population_density: 94.65, population: 4822023},
   "Alaska" => {population_density: 1.1111, population: 731449},
   "Arizona" => {population_density: 57.05, population: 6553255},
