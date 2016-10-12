@@ -1,0 +1,49 @@
+sqlite> select * from positions;
+
+1|ATVI|-100|44.14|43.17|1
+2|JPM|100|58.7|68.13|2
+3|GPRO|-100|15.87|14.24|1
+
+
+
+sqlite> UPDATE positions SET last=42.90 WHERE ticker="ATVI";
+sqlite> select * from positions;
+
+1|ATVI|-100|44.14|42.9|1
+2|JPM|100|58.7|68.13|2
+3|GPRO|-100|15.87|14.24|1
+
+
+
+sqlite> SELECT * FROM portfolio, positions WHERE portfolio.id = positions.strategy_id;
+
+1|Technology|1|ATVI|-100|44.14|42.9|1
+2|Finance|2|JPM|100|58.7|68.13|2
+1|Technology|3|GPRO|-100|15.87|14.24|1
+
+
+
+sqlite> SELECT positions.ticker, positions.last, portfolio.strategy FROM positions JOIN portfolio ON positions.strategy_id = portfolio.id;	
+
+ATVI|42.9|Technology
+JPM|68.13|Finance
+GPRO|14.24|Technology
+
+
+
+sqlite> DELETE FROM positions WHERE positions.strategy_id = 2;
+sqlite> select * from positions;
+
+1|ATVI|-100|44.14|42.9|1
+3|GPRO|-100|15.87|14.24|1
+
+
+
+sqlite> select * from positions CROSS JOIN portfolio ON positions.last > 40;
+
+1|ATVI|-100|44.14|42.9|1|1|Technology
+1|ATVI|-100|44.14|42.9|1|2|Finance
+
+
+*** Why is it creating a row for technology & finance, when it has the strategy_id of 1? ***
+
