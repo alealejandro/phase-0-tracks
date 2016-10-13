@@ -1,0 +1,33 @@
+Joining 3 tables:
+
+	SELECT * FROM reviews
+	JOIN users ON reviews.user_id = users.id
+	JOIN businesses ON reviews.business_id = businesses.id;
+
+	|4|Great wedding chapel|1|1|1|Bradford|Pitt|1|Grundy Hollow Wedding Chapel
+	|5|Great towing!|2|4|4|Steven|Wonder|2|Amir's Towing
+	|4|Great nightclub|3|2|2|Mandy|Kaling|3|The Beagle Nightclub
+	|4|Nice towing|2|3|3|Angela|Jolie|2|Amir's Towing
+
+Eliminate repetitive columns; show user name, business name, star rating, comment:
+
+	SELECT users.first_name, users.last_name, businesses.name, reviews.stars, reviews.comment FROM reviews
+	JOIN users ON reviews.user_id = users.id
+	JOIN businesses ON reviews.business_id = businesses.id;
+
+	Bradford|Pitt|Grundy Hollow Wedding Chapel|4|Great wedding chapel
+	Steven|Wonder|Amir's Towing|5|Great towing!
+	Mandy|Kaling|The Beagle Nightclub|4|Great nightclub
+	Angela|Jolie|Amir's Towing|4|Nice towing
+
+View the data of all 3 tables for just 1 business:
+
+	SELECT users.first_name, users.last_name, businesses.name, reviews.stars, reviews.comment FROM reviews
+	JOIN users ON reviews.user_id = users.id
+	JOIN businesses ON reviews.business_id = businesses.id
+	WHERE name="Amir's Towing";
+
+	Steven|Wonder|Amir's Towing|5|Great towing!
+	Angela|Jolie|Amir's Towing|4|Nice towing
+
+
