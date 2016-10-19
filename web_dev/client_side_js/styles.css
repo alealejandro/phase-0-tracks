@@ -1,0 +1,56 @@
+body {
+	font-family: arial;
+	width: 80%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+table {
+	border: 5px solid;
+	margin-left: auto;
+	margin-right: auto;
+	background-image: url("old-white-background.jpg");
+}
+
+td, th {
+	border: 1px solid;
+}
+
+.axis {
+	padding: 20px;
+}
+
+footer {
+	margin-bottom: 80px;
+}
+
+a:visited {
+	color: red;
+}
+
+#aom {
+	font-size: 24px;
+}
+
+@media screen and (max-width: 500px) {
+  img {
+    width: 100%;
+  }
+}
+
+h1 {
+	opacity: 0;
+}
+
+/*
+	Padding and border added to at least one element
+	Margin added to at least one element
+	At least one centered element (a footer message can be nice for this)
+	A background image on at least one element
+	A different font on at least one element
+	A few elements styled using a class
+	A different color for visited links
+	An element styled with an ID
+
+	Add at least one media query to improve the responsiveness of your page.
+*/
