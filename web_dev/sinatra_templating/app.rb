@@ -25,3 +25,12 @@ post '/students' do
 end
 
 # add static resources
+
+###### Release 0 & 1: ######
+get '/about' do
+	erb :about
+end
+
+###### Release 2 ######
+
+# Skipped again because I can't check work because web server has gem conflict issues.
