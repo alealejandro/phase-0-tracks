@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>About Student MGMT System</title>
+</head>
+<body>
+	<h1>About</h1>
+	<p>
+		<% age_sum = 0 %>
+		<% @students.each do |student| %>
+			<% age_sum += student['age'].to_i %>
+		<% end %>
+		<%= age_sum %>
+	</p>
+</body>
+</html>
